@@ -35,9 +35,4 @@ for l in file:
       x += xinc
       y += yinc
 
-ret = 0
-for v in D.values():
-  if v > 1:
-    ret += 1
-
-print(ret)
+print(sum(1 for i in D.values() if i > 1))
