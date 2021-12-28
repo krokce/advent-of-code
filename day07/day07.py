@@ -1,6 +1,6 @@
 import numpy as np
 
-input = open('day7.txt', 'r').read()
+input = open('day07.txt', 'r').read()
 input = list(map(int, input.split(",")))
 
 def fuel(d):

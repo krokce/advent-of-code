@@ -1,4 +1,4 @@
-with open('day8.txt', 'r') as file:
+with open('day08.txt', 'r') as file:
   input = [l.strip() for l in file.readlines()]
 
 N = {3:7, 7:8, 2:1, 4:4}

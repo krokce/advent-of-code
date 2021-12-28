@@ -1,4 +1,4 @@
-lines = open('day3.txt', 'r').readlines()
+lines = open('day03.txt', 'r').readlines()
 
 sample = "101010100101"
 # sample = "01010"

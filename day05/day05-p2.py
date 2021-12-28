@@ -1,4 +1,4 @@
-file = open('day5.txt', 'r').readlines()
+file = open('day05.txt', 'r').readlines()
 
 D = {}
 lines = []

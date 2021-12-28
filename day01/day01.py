@@ -1,4 +1,4 @@
-lines = open('day1.txt', 'r').readlines()
+lines = open('day01.txt', 'r').readlines()
 
 # 1
 cur = None

@@ -1,4 +1,4 @@
-with open('day9.txt', 'r') as file:
+with open('day09.txt', 'r') as file:
   input = [l.strip() for l in file.readlines()]
 
 map = []

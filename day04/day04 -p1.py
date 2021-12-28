@@ -1,4 +1,4 @@
-lines = open('day4.txt', 'r').readlines()
+lines = open('day04.txt', 'r').readlines()
 lines = [l.strip() for l in lines]
 
 l = []
@@ -24,13 +24,9 @@ def new_number(n):
         col = v[x].index(n)
         T[k][x][col] = -1
         if sum([i for i in T[k][x] if i != -1]) == 0 or sum([i for row in T[k] for i in [row[col]] if i != -1]) == 0: 
-          if k not in winners:
-            winners.append(k)
-          if len(winners) == len(T):
-            return (True, T[k])
+          return (True, T[k])
   return (False, [])
 
-winners = []
 for n in l:
   is_bingo, board = new_number(n)
   if is_bingo:

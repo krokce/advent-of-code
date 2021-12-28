@@ -1,5 +1,4 @@
-# input = "3,4,3,1,2"
-input = open('day6.txt', 'r').read()
+input = open('day06.txt', 'r').read()
 
 l = list(map(int, input.split(",")))
 

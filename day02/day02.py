@@ -1,4 +1,4 @@
-lines = open('day2.txt', 'r').readlines()
+lines = open('day02.txt', 'r').readlines()
 
 # 1
 position = 0
