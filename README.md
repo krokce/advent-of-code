@@ -1,3 +1,2 @@
-# Advent of Code 2021
-
-My Python solutions to [Advent of Code 2021](https://adventofcode.com/2021) puzzles.
+# Advent of Code
+My Python solutions to [Advent of Code](https://adventofcode.com) puzzles.
