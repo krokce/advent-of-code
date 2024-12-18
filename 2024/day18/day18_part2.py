@@ -27,13 +27,9 @@ M = {}
 for y in range(end[1]+1):
 	for x in range(end[0]+1):
 		M[(x,y)] = '.'
-print_maze([])
 
 for b in lines[0:size]:
 	M[b] = '#'
-
-print(M)
-print_maze([])
 
 def solve(start):
 	Q = []
