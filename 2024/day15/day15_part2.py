@@ -34,9 +34,6 @@ moves = []
 for m in lines[1].split("\n"):
 	moves = moves + list(m)
 
-# print(M)
-# print(moves)
-
 D = [(0,1), (0,-1), (-1,0), (1,0)]
 DP = list("v^<>")
 
@@ -57,24 +54,79 @@ def print_maze():
 		print()
 	print()
 
-def move(position, move):
+def get_new_position(position, move):
 	dx, dy = D[DP.index(move)]
-	new_position = (position[0]+dx, position[1]+dy)
-	boxes_to_move = []
-	if new_position not in M or M[new_position] == "#":
-		return position
-	if M[new_position] == "O":
-		scan_position = new_position
-		while True:
-			scan_position = (scan_position[0]+dx, scan_position[1]+dy)
-			if M[scan_position] == ".":
-				M[scan_position] = "O"
-				M[new_position] = "."
-				return new_position
-			elif scan_position not in M or M[scan_position] == "#":
-				return position
-			else:
-				continue
-	return new_position
+	return (position[0]+dx, position[1]+dy)
+
+def get_connected_blocks(position, move):
+	new_position = get_new_position(position, move)
+	v = M[new_position]
+	ret = []
+
+	if v in list("#."):
+		return list(set(ret))
 	
+	if len(v) > 1 and move in list("v^"): 
+		ret.append(new_position)
+		# hitting the right - add the left
+		if v[1] > 0:
+			ret.append((new_position[0]-1,new_position[1]))
+		# hitting the left - add the right 
+		else:
+			ret.append((new_position[0]+1,new_position[1]))
+		
+		ret = ret + get_connected_blocks(ret[-1], move) + get_connected_blocks(ret[-2], move)
+	
+	if len(v) > 1 and move in list("<>"):
+		ret.append(new_position)
+		# hitting the right - add the right
+		if v[1] > 0:
+			ret.append((new_position[0]-1,new_position[1]))
+		# hitting the left - add the right
+		else:
+			ret.append((new_position[0]+1,new_position[1]))
+		ret = ret + get_connected_blocks(ret[-1], move)
+	return list(set(ret))
+
+def can_move(blocks, move):
+	for b in blocks:
+		new_position = get_new_position(b,move)
+		if M[new_position] != "." and new_position not in blocks:
+			return False
+	return True
+
+def move(position, move):
+	new_position = get_new_position(position, move)
+
+	if M[new_position] == "#":
+		return position
+	
+	if len(M[new_position]) > 1:
+		blocks = get_connected_blocks(position, move)
+		if can_move(blocks, move):
+			dx, dy = D[DP.index(move)]
+			tmp = {}
+			for b in blocks:
+				tmp[b] = M[b]
+				M[b] = "."
+
+			for b in blocks:
+				M[(b[0]+dx,b[1]+dy)] = tmp[b]
+
+			return new_position
+		else:
+			return position
+	
+	return new_position
+
 print_maze()
+for m in moves:
+	robot_position = move(robot_position, m)
+print_maze()
+
+ret = 0
+for (x,y), m in M.items():
+	if len(m) > 1 and m[1] < 0:
+		ret = ret + x + 100*y
+
+print(ret)

@@ -1,6 +1,3 @@
-import heapq 
-from collections import defaultdict
-
 with open('input.txt', 'r') as file:
 	lines = [l.strip() for l in file.read().split("\n\n")]
 
@@ -21,9 +18,6 @@ max_y = max([y for x,y in M.keys()])
 moves = []
 for m in lines[1].split("\n"):
 	moves = moves + list(m)
-
-print(M)
-print(moves)
 
 D = [(0,1), (0,-1), (-1,0), (1,0)]
 DP = list("v^<>")
@@ -55,15 +49,13 @@ def move(position, move):
 	return new_position
 	
 print_maze()
-
 for m in moves:
 	robot_position = move(robot_position, m)
+print_maze()
 
 ret = 0
 for (x,y), m in M.items():
 	if m == "O":
 		ret = ret + x + 100*y
 
-print_maze()
 print(ret)
-	
